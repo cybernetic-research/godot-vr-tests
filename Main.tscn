@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgmcrpoe77pvw"]
+[gd_scene load_steps=17 format=3 uid="uid://bgmcrpoe77pvw"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_yeahp"]
 [ext_resource type="PackedScene" uid="uid://d0t1exku7g0il" path="res://xr_origin.tscn" id="2_6oiom"]
 [ext_resource type="PackedScene" uid="uid://ckwwdgkkhayir" path="res://cube.tscn" id="3_h8jfl"]
 [ext_resource type="PackedScene" uid="uid://cd6gemhd0qccp" path="res://rock_climb_object.tscn" id="4_3fq0u"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="5_br618"]
+[ext_resource type="PackedScene" uid="uid://bunach7g4xada" path="res://game_ui.tscn" id="6_rrv2h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kw1g1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,6 +37,9 @@ size = Vector3(1, 1, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tirqe"]
 size = Vector3(0.5, 2.5, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yk63n"]
+albedo_color = Color(0.996078, 0.968627, 0.768627, 1)
 
 [node name="Main" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317688, -1.47876, -0.637144)
@@ -97,3 +102,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68097, 1.67753, -0.709523)
 
 [node name="RockClimbObject8" parent="." instance=ExtResource("4_3fq0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68097, 0.888091, -0.681928)
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("5_br618")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, -0.139881, 1.29527, 0.173717)
+screen_size = Vector2(1280, 768)
+scene = ExtResource("6_rrv2h")
+viewport_size = Vector2(640, 480)
+material = SubResource("StandardMaterial3D_yk63n")
+transparent = 0
+unshaded = true
+scene_properties_keys = PackedStringArray()
