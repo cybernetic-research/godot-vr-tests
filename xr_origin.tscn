@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0t1exku7g0il"]
+[gd_scene load_steps=10 format=3 uid="uid://d0t1exku7g0il"]
 
 [ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="1_1chts"]
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="2_twlmd"]
@@ -6,7 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_ymgi1"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="4_dpo83"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="4_wo8lt"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="5_onhjx"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="6_3v8lj"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="9_7y7ai"]
+
+[sub_resource type="Resource" id="Resource_fph1c"]
+script = ExtResource("9_7y7ai")
+flags = 0
+move_drag = 5.0
+move_traction = 30.0
+stop_on_slope = true
+move_max_slope = 45.0
+jump_max_slope = 45.0
+jump_velocity = 5.0
+bounciness = 0.0
+bounce_threshold = 1.0
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -32,10 +45,9 @@ turn_mode = 2
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("3_ymgi1")]
 
-[node name="PlayerBody" type="CharacterBody3D" parent="." groups=["player_body"] instance=ExtResource("4_dpo83")]
-process_priority = -100
-process_physics_priority = -100
-top_level = true
-collision_layer = 524288
-collision_mask = 1023
-script = ExtResource("5_onhjx")
+[node name="MovementJump" parent="RightHand" instance=ExtResource("6_3v8lj")]
+jump_button_action = "ax_button"
+
+[node name="PlayerBody" parent="." instance=ExtResource("4_dpo83")]
+physics = SubResource("Resource_fph1c")
+ground_control = 2
