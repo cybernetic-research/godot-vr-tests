@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgmcrpoe77pvw"]
+[gd_scene load_steps=12 format=3 uid="uid://bgmcrpoe77pvw"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_yeahp"]
 [ext_resource type="PackedScene" uid="uid://d0t1exku7g0il" path="res://xr_origin.tscn" id="2_6oiom"]
+[ext_resource type="PackedScene" uid="uid://ckwwdgkkhayir" path="res://cube.tscn" id="3_h8jfl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kw1g1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +22,16 @@ size = Vector3(5, 0.1, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_i0aag"]
 size = Vector3(5, 0.1, 5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rreex"]
+albedo_color = Color(0.572549, 0.572549, 0.572549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ksd4"]
+material = SubResource("StandardMaterial3D_rreex")
+size = Vector3(1, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sru2k"]
+size = Vector3(1, 1, 0.5)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_yeahp")
 
@@ -37,6 +48,19 @@ transform = Transform3D(1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, -0.05
 shape = SubResource("BoxShape3D_ahuqu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124783, 0.117631, 0.0653834)
 mesh = SubResource("BoxMesh_i0aag")
 
 [node name="XROrigin3D" parent="." instance=ExtResource("2_6oiom")]
+
+[node name="Table" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10539, 0.51685, 0.778971)
+mesh = SubResource("BoxMesh_4ksd4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D"]
+shape = SubResource("BoxShape3D_sru2k")
+
+[node name="PickableObject" parent="." instance=ExtResource("3_h8jfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149843, 1.15382, 0.762237)
