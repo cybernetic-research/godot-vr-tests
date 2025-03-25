@@ -1,2 +1,2 @@
 # godot-vr-tests
-a place to put soem godot vr experiments
+a place to put some godot vr experiments
